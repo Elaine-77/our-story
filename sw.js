@@ -1,5 +1,5 @@
 // Service Worker for Our Story - 离线缓存
-const CACHE_NAME = 'our-story-v5';
+const CACHE_NAME = 'our-story-v6';
 const ASSETS_TO_CACHE = [
   './',
   './sample-game.html',
@@ -27,19 +27,31 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
+// Network-first 策略：优先从网络获取最新版本，网络失败时回退缓存
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+  
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) return cachedResponse;
-      return fetch(event.request).then((response) => {
-        if (!response || response.status !== 200 || response.type !== 'basic') return response;
+    fetch(event.request)
+      .then((response) => {
+        if (!response || response.status !== 200 || response.type !== 'basic') {
+          return response;
+        }
+        // 缓存最新版本
         const responseToCache = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, responseToCache);
+        });
         return response;
-      }).catch(() => {
-        if (event.request.destination === 'document') return caches.match('./sample-game.html');
-      });
-    })
+      })
+      .catch(() => {
+        // 网络失败，回退缓存
+        return caches.match(event.request).then((cached) => {
+          if (cached) return cached;
+          if (event.request.destination === 'document') {
+            return caches.match('./sample-game.html');
+          }
+        });
+      })
   );
 });
