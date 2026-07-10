@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="theme-color" content="#722F37" />
+  <meta name="apple-mobile-web-app-title" content="我们的故事" />
+  <meta name="theme-color" content="#1a1410" />
+  <meta name="description" content="一个关于回忆与爱的互动叙事游戏" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./icon-512.jpg" />
   <title>我们的故事</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Playfair+Display:wght@400;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" rel="stylesheet">
 
   <style>
@@ -30,6 +31,9 @@
     #ui-layer > * { pointer-events: auto; }
     #transition-overlay { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
   </style>
+  <script type="module" crossorigin src="./assets/sampleGame-CplWwmlU.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/index-DzjGLEWQ.js">
+  <link rel="stylesheet" crossorigin href="./assets/sampleGame-CXQz4h-T.css">
 </head>
 <body>
   <div id="game-root">
@@ -38,33 +42,17 @@
     <div id="ui-layer"></div>
     <div id="transition-overlay"></div>
   </div>
-  <div id="debug-error-panel" style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;background:#1a0f0a;color:#ff6b6b;font-family:monospace;font-size:12px;padding:20px;overflow:auto;display:none;white-space:pre-wrap;"></div>
   <script>
-    // 临时错误捕获 - 排查空白页问题
-    window.addEventListener('error', function(e) {
-      var panel = document.getElementById('debug-error-panel');
-      panel.style.display = 'block';
-      panel.textContent += '[ERROR] ' + (e.message || 'Unknown') + '\n';
-      if (e.filename) panel.textContent += '  at ' + e.filename + ':' + e.lineno + ':' + e.colno + '\n';
-      if (e.error && e.error.stack) panel.textContent += e.error.stack + '\n\n';
-    });
-    window.addEventListener('unhandledrejection', function(e) {
-      var panel = document.getElementById('debug-error-panel');
-      panel.style.display = 'block';
-      panel.textContent += '[PROMISE REJECT] ' + (e.reason && e.reason.message || e.reason) + '\n';
-      if (e.reason && e.reason.stack) panel.textContent += e.reason.stack + '\n\n';
-    });
-    console.error = (function(orig) {
-      return function() {
-        var panel = document.getElementById('debug-error-panel');
-        if (panel) {
-          panel.style.display = 'block';
-          panel.textContent += '[console.error] ' + Array.from(arguments).join(' ') + '\n';
-        }
-        orig.apply(console, arguments);
-      };
-    })(console.error);
+    // 注册 Service Worker（PWA 离线支持）
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('./sw.js').then(function(reg) {
+          console.log('[PWA] Service Worker registered:', reg.scope);
+        }).catch(function(err) {
+          console.log('[PWA] SW registration failed:', err);
+        });
+      });
+    }
   </script>
-  <script type="module" src="./sample-game/main.js"></script>
 </body>
 </html>
