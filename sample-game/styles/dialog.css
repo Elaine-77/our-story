@@ -1,0 +1,227 @@
+/* === Dialog & Choice UI === */
+
+/* Dialog box - parchment style at bottom of screen */
+.dialog-box {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 20px 32px;
+  padding-bottom: calc(32px + var(--safe-bottom));
+  background: linear-gradient(
+    to bottom,
+    rgba(232, 220, 200, 0.0) 0%,
+    rgba(232, 220, 200, 0.95) 15%,
+    rgba(245, 239, 224, 0.98) 100%
+  );
+  border-top: 1px solid rgba(201, 169, 89, 0.2);
+  z-index: 10;
+}
+
+.dialog-speaker {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dark-gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.dialog-text {
+  font-family: var(--font-handwriting);
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--burnt-umber);
+  min-height: 60px;
+  white-space: pre-wrap;
+}
+
+.dialog-text.narrator {
+  font-family: var(--font-handwriting);
+  font-style: italic;
+  color: rgba(92, 64, 51, 0.85);
+}
+
+/* Continue indicator */
+.dialog-continue {
+  position: absolute;
+  bottom: calc(12px + var(--safe-bottom));
+  right: 20px;
+  width: 24px;
+  height: 24px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.dialog-continue.visible {
+  opacity: 0.9;
+  animation: continue-bounce 1.2s ease-in-out infinite;
+}
+
+.dialog-continue::before {
+  content: '';
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-right: 3px solid var(--dark-gold);
+  border-bottom: 3px solid var(--dark-gold);
+  transform: rotate(45deg);
+  filter: drop-shadow(0 0 4px rgba(201, 169, 89, 0.6));
+}
+
+@keyframes continue-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* Choice Panel */
+.choice-panel {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(26, 15, 10, 0.6) 0%,
+    rgba(26, 15, 10, 0.85) 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  z-index: 11;
+}
+
+.choice-panel.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Wax seal style choice buttons */
+.choice-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  max-width: 320px;
+  padding: 16px 28px;
+  background: radial-gradient(
+    ellipse at center,
+    var(--wine-red) 0%,
+    #5a2129 70%,
+    #4a1a22 100%
+  );
+  border: 1px solid rgba(201, 169, 89, 0.3);
+  border-radius: 40px;
+  color: var(--ivory);
+  font-family: var(--font-handwriting);
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  touch-action: manipulation;
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.choice-btn.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.choice-btn:hover,
+.choice-btn:active {
+  box-shadow:
+    0 4px 20px rgba(201, 169, 89, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 0 1px rgba(201, 169, 89, 0.5);
+  transform: scale(1.03);
+}
+
+.choice-btn:active {
+  transform: scale(0.98);
+}
+
+/* Typewriter cursor */
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--burnt-umber);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: cursor-blink 0.8s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* === Memory Fragment Notification === */
+.fragment-notification {
+  position: fixed;
+  top: calc(var(--safe-top) + 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 15, 10, 0.9) 0%,
+    rgba(40, 25, 15, 0.9) 100%
+  );
+  border: 1px solid rgba(201, 169, 89, 0.4);
+  border-radius: 24px;
+  z-index: 20;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.fragment-icon {
+  font-size: 1.2rem;
+  color: var(--amber);
+  text-shadow: 0 0 8px rgba(255, 191, 0, 0.5);
+}
+
+.fragment-text {
+  font-family: var(--font-handwriting);
+  font-size: 0.9rem;
+  color: var(--ivory);
+  white-space: nowrap;
+}
+
+/* Fragment counter (top-right) */
+.fragment-counter {
+  position: fixed;
+  top: calc(var(--safe-top) + 16px);
+  right: 16px;
+  font-family: var(--font-handwriting);
+  font-size: 0.85rem;
+  color: var(--dark-gold);
+  opacity: 0.7;
+  z-index: 15;
+}
+
+/* Landscape orientation warning */
+.landscape-warning {
+  display: none;
+}
+
+/* Choice buttons group */
+.choice-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 320px;
+}

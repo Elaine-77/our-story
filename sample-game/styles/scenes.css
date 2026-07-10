@@ -1,0 +1,378 @@
+/* === Our Story — Scene Styles === */
+
+/* Scene backgrounds with parallax layers */
+.scene-parallax {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.scene-parallax .parallax-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+
+.scene-parallax .parallax-layer--far {
+  transform: scale(1.05);
+}
+
+.scene-parallax .parallax-layer--mid {
+  transform: scale(1.03);
+}
+
+.scene-parallax .parallax-layer--near {
+  transform: scale(1.01);
+}
+
+/* Scene overlay for atmosphere */
+.scene-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.scene-atmosphere--warm {
+  background: radial-gradient(
+    ellipse at 50% 30%,
+    rgba(255, 191, 0, 0.08) 0%,
+    transparent 70%
+  );
+}
+
+.scene-atmosphere--cool {
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(91, 154, 139, 0.08) 0%,
+    transparent 70%
+  );
+}
+
+.scene-atmosphere--dim {
+  background: linear-gradient(
+    to bottom,
+    rgba(26, 15, 10, 0.3) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(26, 15, 10, 0.4) 100%
+  );
+}
+
+/* Hotspot indicators */
+.hotspot {
+  position: absolute;
+  cursor: pointer;
+  z-index: 5;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hotspot-indicator {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.hotspot-indicator::before {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--dark-gold);
+  opacity: 0.95;
+  box-shadow: 0 0 12px rgba(255, 191, 0, 0.7), 0 0 24px rgba(201, 169, 89, 0.5);
+  animation: breathe-glow 2s ease-in-out infinite;
+}
+
+.hotspot-indicator::after {
+  content: '';
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2.5px solid var(--dark-gold);
+  opacity: 0.6;
+  animation: golden-pulse 2s ease-in-out infinite;
+}
+
+.hotspot--fragment .hotspot-indicator::before {
+  background: var(--amber);
+  box-shadow: 0 0 14px rgba(255, 191, 0, 0.8), 0 0 28px rgba(255, 191, 0, 0.6);
+}
+
+.hotspot--hidden .hotspot-indicator {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hotspot--hidden:active .hotspot-indicator,
+.hotspot--hidden.hotspot--discovered .hotspot-indicator {
+  opacity: 1;
+}
+
+.hotspot--collected {
+  pointer-events: none;
+}
+
+.hotspot--collected .hotspot-indicator::before {
+  background: rgba(201, 169, 89, 0.3);
+  animation: none;
+}
+
+.hotspot--collected .hotspot-indicator::after {
+  opacity: 0.15;
+  animation: none;
+}
+
+/* Hotspot label */
+.hotspot-label {
+  margin-top: 6px;
+  font-family: var(--font-handwriting);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #FFE8A0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.7), 0 0 2px rgba(0, 0, 0, 1);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 1;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+/* Restaurant hub scene */
+.restaurant-scene {
+  background: linear-gradient(
+    to bottom,
+    #1a0f0a 0%,
+    #2a1a12 30%,
+    #1a0f0a 100%
+  );
+}
+
+.restaurant-table {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  max-width: 400px;
+}
+
+.restaurant-items {
+  position: relative;
+  padding: 20px;
+}
+
+.restaurant-item {
+  position: absolute;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.restaurant-item:active {
+  transform: scale(0.95);
+}
+
+/* Chapter title card */
+.chapter-title-card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26, 15, 10, 0.85);
+  z-index: 10;
+}
+
+.chapter-title-card h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  color: var(--dark-gold);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5em;
+  animation: title-reveal 1.2s ease-out forwards;
+}
+
+.chapter-title-card .chapter-subtitle {
+  font-family: var(--font-handwriting);
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: var(--ivory);
+  opacity: 0.7;
+  animation: float-up 1s ease-out 0.5s forwards;
+  opacity: 0;
+}
+
+/* Chapter 1: warm amber tones */
+.scene--ch1 {
+  --chapter-accent: var(--ch1-accent);
+}
+
+/* Chapter 2: golden warmth */
+.scene--ch2 {
+  --chapter-accent: var(--ch2-accent);
+}
+
+/* Chapter 3: teal outdoors */
+.scene--ch3 {
+  --chapter-accent: var(--ch3-accent);
+}
+
+/* Chapter 4: rose nostalgia */
+.scene--ch4 {
+  --chapter-accent: var(--ch4-accent);
+}
+
+/* Object highlight on interaction */
+.scene-object {
+  transition: filter 0.3s ease;
+}
+
+.scene-object--highlighted {
+  filter: brightness(1.15) drop-shadow(0 0 8px rgba(201, 169, 89, 0.4));
+}
+
+/* Scroll indicator for scrollable scenes */
+.scroll-indicator {
+  position: absolute;
+  bottom: calc(var(--safe-bottom) + 80px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.5;
+  animation: gentle-bob 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.scroll-indicator span {
+  font-family: var(--font-handwriting);
+  font-size: 0.85rem;
+  color: var(--ivory);
+}
+
+.scroll-indicator::after {
+  content: '';
+  width: 1px;
+  height: 24px;
+  background: linear-gradient(to bottom, var(--dark-gold), transparent);
+}
+
+/* Odometer / counter display */
+.odometer-display {
+  display: inline-flex;
+  gap: 2px;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: bold;
+  color: var(--dark-gold);
+}
+
+.odometer-digit {
+  display: inline-block;
+  width: 0.65em;
+  height: 1.2em;
+  overflow: hidden;
+  border: 1px solid rgba(201, 169, 89, 0.3);
+  border-radius: 4px;
+  background: rgba(26, 15, 10, 0.6);
+  text-align: center;
+  line-height: 1.2em;
+}
+
+.odometer-digit-inner {
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* === Layered Scene Background System === */
+
+/* AI-generated background image layer */
+.scene-bg-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* Gradient overlay layer */
+.scene-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Paper grain texture overlay */
+.scene-paper-texture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.12;
+}
+
+/* Vignette overlay */
+.scene-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(26, 15, 10, 0.25) 75%,
+    rgba(26, 15, 10, 0.55) 100%
+  );
+}
+
+/* Scene divider between sub-scenes */
+.scene-divider {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--dark-gold), transparent);
+  transform: scaleX(0);
+  transform-origin: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.scene-divider::before,
+.scene-divider::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  width: 5px;
+  height: 5px;
+  background: var(--dark-gold);
+  opacity: 0.5;
+  transform: rotate(45deg);
+}
+
+.scene-divider::before {
+  left: 0;
+}
+
+.scene-divider::after {
+  right: 0;
+}

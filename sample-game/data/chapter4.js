@@ -1,0 +1,128 @@
+/**
+ * Chapter 4 Data: 此刻的你 (爱人篇 / 情感高潮)
+ * Envelope → Letter → Turn around → Birthday cake → Wish
+ */
+export const chapterData = {
+  scenes: [
+    // --- Scene 1: 信封 ---
+    {
+      background: {
+        image: 'ch4-s1-envelope.jpg',
+        gradient: 'linear-gradient(to bottom, rgba(58,42,26,0.45) 0%, rgba(42,26,18,0.5) 50%, rgba(26,15,10,0.55) 100%)',
+        atmosphere: 'warm'
+      },
+      dialog: [
+        { type: 'narrator', text: '牛皮纸信封，上面有熟悉的字迹写着你的名字。', speed: 55 },
+        { type: 'silence', duration: 1500 },
+        { type: 'narrator', text: '沿着封口，慢慢滑开……', speed: 60 },
+        { type: 'silence', duration: 1000 },
+        { type: 'narrator', text: '里面是一张折叠的信纸。', speed: 55 }
+      ]
+    },
+
+    // --- Scene 2: 展开信纸 ---
+    {
+      background: {
+        image: 'ch4-s2-letter.jpg',
+        gradient: 'linear-gradient(to bottom, rgba(245,239,224,0.3) 0%, rgba(232,220,200,0.35) 50%, rgba(212,197,169,0.4) 100%)',
+        atmosphere: null
+      },
+      hotspots: [
+        {
+          id: 'ch4-letter-clue',
+          type: 'fragment',
+          label: '信纸线索',
+          fragmentId: 'ch4-letter-clue',
+          bounds: { x: 25, y: 35, width: 50, height: 25 },
+          dialogNodes: [
+            { type: 'narrator', text: '每一页，都是你写的。', speed: 55 }
+          ],
+          hidden: true,
+          delay: 1.0
+        }
+      ],
+      dialog: [
+        { type: 'narrator', text: '信纸上的字迹，只有你们两个人才能读懂。', speed: 50 },
+        { type: 'silence', duration: 1500 },
+        { type: 'narrator', text: '"Dear，"', speed: 50 },
+        { type: 'narrator', text: '"现在正是最好的年纪——阅历与热情并存。"', speed: 48 },
+        { type: 'silence', duration: 1000 },
+        { type: 'narrator', text: '"愿你永远有时间和勇气去做自己喜欢的事，"', speed: 48 },
+        { type: 'narrator', text: '"活得自在又尽兴。"', speed: 48 },
+        { type: 'silence', duration: 1000 },
+        { type: 'narrator', text: '"有我陪着你，一起慢慢往后走。"', speed: 48 },
+        { type: 'silence', duration: 2500 }
+      ]
+    },
+
+    // --- Scene 3: 信纸最后一行 ---
+    {
+      background: {
+        image: 'ch4-s3-lastline.jpg',
+        gradient: 'linear-gradient(to bottom, rgba(232,220,200,0.3) 0%, rgba(212,197,169,0.35) 50%, rgba(200,184,152,0.4) 100%)',
+        atmosphere: null
+      },
+      dialog: [
+        { type: 'narrator', text: '信纸最后一行字迹缓缓浮现——', speed: 55 },
+        { type: 'silence', duration: 2000 },
+        { type: 'narrator', text: '"祝你生日快乐。"', speed: 80 },
+        { type: 'silence', duration: 2500 }
+      ]
+    },
+
+    // --- Scene 4: 转身 (高潮) ---
+    {
+      background: {
+        image: 'ch4-s4-climax.jpg',
+        gradient: 'radial-gradient(ellipse at 50% 50%, rgba(74,42,42,0.4) 0%, rgba(58,26,26,0.5) 40%, rgba(26,15,10,0.6) 100%)',
+        atmosphere: 'warm'
+      },
+      dialog: [
+        { type: 'narrator', text: '缓缓转身——', speed: 70 },
+        { type: 'silence', duration: 2000 },
+        { type: 'narrator', text: '她站在那里。', speed: 70 },
+        { type: 'narrator', text: '手里捧着一个小蛋糕，上面插着一支蜡烛。', speed: 50 },
+        { type: 'silence', duration: 2000 },
+        { type: 'narrator', text: '没有烟花。没有花瓣。没有夸张的特效。', speed: 50 },
+        { type: 'narrator', text: '只有烛光映在脸上，和一句——', speed: 55 },
+        { type: 'silence', duration: 1500 },
+        { type: 'dialog', speaker: '爱人', text: '生日快乐。', speed: 80 },
+        { type: 'silence', duration: 5000 }
+      ]
+    },
+
+    // --- Scene 5: 蛋糕 + 许愿 ---
+    {
+      background: {
+        image: 'ch4-s5-wish.jpg',
+        gradient: 'radial-gradient(ellipse at 50% 40%, rgba(90,58,42,0.4) 0%, rgba(58,32,24,0.5) 50%, rgba(26,15,10,0.6) 100%)',
+        atmosphere: 'warm'
+      },
+      hotspots: [
+        {
+          id: 'ch4-candle',
+          type: 'dialog',
+          label: '蜡烛',
+          bounds: { x: 40, y: 30, width: 20, height: 20 },
+          dialogNodes: [
+            { type: 'narrator', text: '蜡烛熄灭的瞬间，画面短暂地完全黑暗。', speed: 50 }
+          ],
+          required: true,
+          delay: 0.5
+        }
+      ],
+      introDialog: [
+        { type: 'dialog', speaker: '爱人', text: '许个愿吧。', speed: 60 },
+        { type: 'silence', duration: 2000 }
+      ],
+      dialog: [
+        { type: 'narrator', text: '闭上眼。', speed: 70 },
+        { type: 'silence', duration: 3000 },
+        { type: 'narrator', text: '然后，从黑暗中，一行字缓缓亮起——', speed: 50 },
+        { type: 'silence', duration: 2000 }
+      ]
+    }
+  ]
+};
+
+export default chapterData;

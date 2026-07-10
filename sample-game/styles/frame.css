@@ -1,0 +1,199 @@
+/* === Art Nouveau Decorative Frame === */
+
+.scene-frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- Corner Ornaments --- */
+.frame-corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  pointer-events: none;
+}
+
+/* Shared corner styling: double-line L-shape with radial gold glow */
+.frame-corner::before,
+.frame-corner::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Outer border line */
+.frame-corner::before {
+  inset: 0;
+  opacity: 0.35;
+}
+
+/* Inner accent dot */
+.frame-corner::after {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--dark-gold);
+  opacity: 0.4;
+}
+
+/* Top-left */
+.frame-corner--tl {
+  top: 10px;
+  left: 10px;
+  border-top: 1.5px solid rgba(201, 169, 89, 0.35);
+  border-left: 1.5px solid rgba(201, 169, 89, 0.35);
+  border-top-left-radius: 12px;
+  background: radial-gradient(
+    ellipse at top left,
+    rgba(201, 169, 89, 0.08) 0%,
+    transparent 70%
+  );
+}
+.frame-corner--tl::before {
+  top: 5px;
+  left: 5px;
+  right: 10px;
+  bottom: 10px;
+  border-top: 1px solid rgba(201, 169, 89, 0.2);
+  border-left: 1px solid rgba(201, 169, 89, 0.2);
+  border-top-left-radius: 8px;
+}
+.frame-corner--tl::after {
+  top: 2px;
+  left: 2px;
+}
+
+/* Top-right */
+.frame-corner--tr {
+  top: 10px;
+  right: 10px;
+  border-top: 1.5px solid rgba(201, 169, 89, 0.35);
+  border-right: 1.5px solid rgba(201, 169, 89, 0.35);
+  border-top-right-radius: 12px;
+  background: radial-gradient(
+    ellipse at top right,
+    rgba(201, 169, 89, 0.08) 0%,
+    transparent 70%
+  );
+}
+.frame-corner--tr::before {
+  top: 5px;
+  right: 5px;
+  left: 10px;
+  bottom: 10px;
+  border-top: 1px solid rgba(201, 169, 89, 0.2);
+  border-right: 1px solid rgba(201, 169, 89, 0.2);
+  border-top-right-radius: 8px;
+}
+.frame-corner--tr::after {
+  top: 2px;
+  right: 2px;
+}
+
+/* Bottom-left */
+.frame-corner--bl {
+  bottom: 10px;
+  left: 10px;
+  border-bottom: 1.5px solid rgba(201, 169, 89, 0.35);
+  border-left: 1.5px solid rgba(201, 169, 89, 0.35);
+  border-bottom-left-radius: 12px;
+  background: radial-gradient(
+    ellipse at bottom left,
+    rgba(201, 169, 89, 0.08) 0%,
+    transparent 70%
+  );
+}
+.frame-corner--bl::before {
+  bottom: 5px;
+  left: 5px;
+  right: 10px;
+  top: 10px;
+  border-bottom: 1px solid rgba(201, 169, 89, 0.2);
+  border-left: 1px solid rgba(201, 169, 89, 0.2);
+  border-bottom-left-radius: 8px;
+}
+.frame-corner--bl::after {
+  bottom: 2px;
+  left: 2px;
+}
+
+/* Bottom-right */
+.frame-corner--br {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 1.5px solid rgba(201, 169, 89, 0.35);
+  border-right: 1.5px solid rgba(201, 169, 89, 0.35);
+  border-bottom-right-radius: 12px;
+  background: radial-gradient(
+    ellipse at bottom right,
+    rgba(201, 169, 89, 0.08) 0%,
+    transparent 70%
+  );
+}
+.frame-corner--br::before {
+  bottom: 5px;
+  right: 5px;
+  left: 10px;
+  top: 10px;
+  border-bottom: 1px solid rgba(201, 169, 89, 0.2);
+  border-right: 1px solid rgba(201, 169, 89, 0.2);
+  border-bottom-right-radius: 8px;
+}
+.frame-corner--br::after {
+  bottom: 2px;
+  right: 2px;
+}
+
+/* --- Edge Borders --- */
+.frame-border {
+  position: absolute;
+  pointer-events: none;
+}
+
+.frame-border--top,
+.frame-border--bottom {
+  left: 70px;
+  right: 70px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(201, 169, 89, 0.15) 20%,
+    rgba(201, 169, 89, 0.25) 50%,
+    rgba(201, 169, 89, 0.15) 80%,
+    transparent 100%
+  );
+}
+
+.frame-border--top {
+  top: 10px;
+}
+
+.frame-border--bottom {
+  bottom: 10px;
+}
+
+.frame-border--left,
+.frame-border--right {
+  top: 70px;
+  bottom: 70px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(201, 169, 89, 0.15) 20%,
+    rgba(201, 169, 89, 0.25) 50%,
+    rgba(201, 169, 89, 0.15) 80%,
+    transparent 100%
+  );
+}
+
+.frame-border--left {
+  left: 10px;
+}
+
+.frame-border--right {
+  right: 10px;
+}

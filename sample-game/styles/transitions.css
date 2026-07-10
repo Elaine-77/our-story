@@ -1,0 +1,188 @@
+/* === Our Story — Transition Animations === */
+
+/* Ink wash overlay */
+.transition-ink {
+  position: absolute;
+  inset: 0;
+  background: var(--deep-brown);
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* Page turn overlay */
+.transition-page {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--ivory) 0%,
+    #f5f0e0 40%,
+    #e8dcc8 100%
+  );
+  transform-origin: left center;
+  transform: rotateY(-90deg);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.transition-page::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(to left, rgba(0,0,0,0.15), transparent);
+}
+
+/* Fade overlay */
+.transition-fade {
+  position: absolute;
+  inset: 0;
+  background: var(--deep-brown);
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* === Scene enter/exit animations === */
+@keyframes scene-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scene-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes scene-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scene-slide-down {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+
+/* === Element animations === */
+@keyframes ink-spread {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    clip-path: circle(75% at 50% 50%);
+    opacity: 1;
+  }
+}
+
+@keyframes wobble-gentle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-1deg); }
+  75% { transform: rotate(1deg); }
+}
+
+@keyframes golden-pulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(201, 169, 89, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(201, 169, 89, 0.6),
+                0 0 40px rgba(201, 169, 89, 0.2);
+  }
+}
+
+@keyframes float-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes gentle-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes stamp-press {
+  0% {
+    transform: scale(2) rotate(-15deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.9) rotate(3deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes dust-float {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  20% { opacity: 0.6; }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx, 20px), var(--dy, -40px));
+  }
+}
+
+/* Memory fragment collection flash */
+@keyframes collect-flash {
+  0% {
+    box-shadow: 0 0 0 0 rgba(201, 169, 89, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 30px 15px rgba(201, 169, 89, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(201, 169, 89, 0);
+  }
+}
+
+/* Chapter title reveal */
+@keyframes title-reveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+/* Breathing glow for interactive elements */
+@keyframes breathe-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
