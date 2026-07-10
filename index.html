@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#722F37">
+  <title>Our Story</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Playfair+Display:wght@400;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #1a0f0a; }
+    #game-root {
+      position: relative;
+      width: 100vw;
+      height: 100dvh;
+      overflow: hidden;
+      font-family: 'Noto Serif SC', serif;
+      color: #FFFFF0;
+    }
+    #scene-layer { position: absolute; inset: 0; z-index: 1; }
+    #particle-canvas { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+    #ui-layer { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+    #ui-layer > * { pointer-events: auto; }
+    #transition-overlay { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div id="game-root">
+    <div id="scene-layer"></div>
+    <canvas id="particle-canvas"></canvas>
+    <div id="ui-layer"></div>
+    <div id="transition-overlay"></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

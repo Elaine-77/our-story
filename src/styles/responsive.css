@@ -1,0 +1,174 @@
+/* === Our Story — Responsive + Mobile Optimization === */
+
+/* Mobile-first: base styles target small screens (375px) */
+
+/* Small phones */
+@media screen and (max-width: 360px) {
+  .dialog-box {
+    padding: 14px 16px;
+  }
+
+  .dialog-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .choice-btn {
+    padding: 12px 18px;
+    font-size: 0.85rem;
+  }
+
+  .chapter-title-card h2 {
+    font-size: 1.6rem;
+  }
+}
+
+/* Standard phones (375-428px) */
+@media screen and (min-width: 361px) and (max-width: 428px) {
+  .dialog-text {
+    font-size: 1rem;
+  }
+}
+
+/* Large phones / small tablets */
+@media screen and (min-width: 429px) and (max-width: 768px) {
+  .dialog-box {
+    max-width: 90%;
+    margin: 0 auto;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .dialog-text {
+    font-size: 1.05rem;
+  }
+
+  .choice-panel {
+    max-width: 80%;
+  }
+}
+
+/* Tablets and desktop */
+@media screen and (min-width: 769px) {
+  #game-root {
+    max-width: 450px;
+    max-height: 900px;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(201, 169, 89, 0.2),
+      0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .dialog-box {
+    border-radius: 12px 12px 0 0;
+  }
+}
+
+/* Landscape warning overlay */
+.landscape-warning {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--deep-brown);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.landscape-warning-icon {
+  width: 60px;
+  height: 80px;
+  border: 2px solid var(--dark-gold);
+  border-radius: 8px;
+  position: relative;
+  animation: wobble-gentle 2s ease-in-out infinite;
+}
+
+.landscape-warning-icon::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid var(--dark-gold);
+}
+
+.landscape-warning p {
+  font-family: var(--font-handwriting);
+  font-size: 1.1rem;
+  color: var(--ivory);
+  opacity: 0.8;
+  text-align: center;
+  padding: 0 40px;
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .landscape-warning {
+    display: flex;
+  }
+}
+
+/* Safe area padding for notched devices */
+@supports (padding: env(safe-area-inset-top)) {
+  .dialog-box {
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .choice-panel {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+
+  .chapter-title-card {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hotspot-indicator::before,
+  .hotspot-indicator::after {
+    animation: none;
+  }
+}
+
+/* Touch target minimum sizes */
+button,
+.hotspot,
+.choice-btn,
+.restaurant-item,
+[role="button"] {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* High-DPI screen optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .scene-bg {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Dark mode forced override (game is always dark) */
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: dark;
+  }
+}
