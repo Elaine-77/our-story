@@ -50,14 +50,21 @@
     <div id="transition-overlay"></div>
   </div>
   <script>
+    // 注销所有旧 Service Worker，清除缓存
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./sw.js').then(function(reg) {
-          console.log('[PWA] Service Worker registered:', reg.scope);
-        }).catch(function(err) {
-          console.log('[PWA] SW registration failed:', err);
-        });
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (var registration of registrations) {
+          registration.unregister();
+        }
       });
+      // 清除所有缓存
+      if ('caches' in window) {
+        caches.keys().then(function(names) {
+          for (var name of names) {
+            caches.delete(name);
+          }
+        });
+      }
     }
   </script>
 </body>
