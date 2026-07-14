@@ -1,5 +1,5 @@
 // Service Worker for Our Story - 离线缓存
-const CACHE_NAME = 'our-story-v7';
+const CACHE_NAME = 'our-story-v8';
 const ASSETS_TO_CACHE = [
   './',
   './sample-game.html',
